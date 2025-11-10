@@ -1,0 +1,1 @@
+PROXY = {'https':'127.0.0.1:10808'} # {'https':'example.com:1234'}
