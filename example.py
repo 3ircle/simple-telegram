@@ -10,5 +10,5 @@ api_key = os.getenv('api_key')
 bot = simple_telegram.bot.Bot(api_key)
 
 
-print(bot._get_update().photo[0].file_id)
+print(bot._get_update()._update_json)
 
