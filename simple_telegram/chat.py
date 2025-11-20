@@ -1,13 +1,17 @@
 from .user import User
 
-class Chat :
-    def __init__(self,chat_data,api_key):
-        self._api_key : str = api_key
-        self._chat_data : dict = chat_data
-        self.accepted_gift_types : dict = self._chat_data.get('accepted_gift_types',{})
-        self.id : int = self._chat_data.get('id',0)
-        self.type : str = self._chat_data.get('type','')
-        self.title : str = self._chat_data.get('title','')
-        self.all_members_are_administrators : bool = self._chat_data.get('all_members_are_administrators',False)
-        self.new_chat_member : User = User(self._chat_data.get('new_chat_member',{}),self._api_key)
 
+class Chat:
+    def __init__(self, data: dict, api_key: str):
+        self._api_key: str = api_key
+        self._data: dict = data or {}
+
+        self.id: int = self._data.get("id", 0)
+        self.type: str = self._data.get("type", "")
+        self.title: str = self._data.get("title", "")
+        self.accepted_gift_types = self._data.get("accepted_gift_types", {})
+
+        new = self._data.get("new_chat_member", {})
+        self.new_chat_member: User | None = (
+            User(new, api_key) if isinstance(new, dict) else None
+        )
